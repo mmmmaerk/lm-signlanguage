@@ -13,18 +13,17 @@ class SampleListener extends Listener {
         HandList hands = frame.hands();
         //creates a hand object using the first hand seen in the list of hands
         Hand firstHand = hands.get(0);
-
+        FingerList fingers = frame.fingers();
+        Finger pointerFinger = fingers.get(1);
         /**
-         *  this is taken straight from the leap motion example.
-         *  i believe that it's going through the list of fingers
-         *  found on the hand and creating bones of the type finger.
+         *  This for loop wsa mostly taken from the Leap Motion website.
+         *  It ACTUALLY tracks the tip of your pointer finger.
+         *  The last version got the tips of all your fingers, I think.
+         *  This one is for sure correct.
          */
-        for (Finger finger : firstHand.fingers()) {
-            for(Bone.Type boneType : Bone.Type.values()) {
-                Bone bone = finger.bone(boneType);
-                //this prints the coordinates of the tip of that finger.
-                System.out.println(bone.nextJoint());
-            }
+        for(Bone.Type boneType : Bone.Type.values()) {
+            Bone bone = pointerFinger.bone(boneType);
+            System.out.println(bone.nextJoint());
         }
 
     }
