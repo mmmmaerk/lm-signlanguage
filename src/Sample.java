@@ -26,6 +26,7 @@ class SampleListener extends Listener {
         Finger middleFinger = fingers.get(2);
         Finger ringFinger = fingers.get(3);
         Finger pinkieFinger = fingers.get(4);
+
         /**
          *  This for loop wsa mostly taken from the Leap Motion website.
          *  It ACTUALLY tracks the tip of your pointer finger.
@@ -52,7 +53,10 @@ class SampleListener extends Listener {
             pinkieFingerBone = pinkieFinger.bone(boneType);
         }
 
-        System.out.println(pointerFinger.direction());
+        //System.out.println(middleFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint()));
+        if (middleFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint()) > 100) {
+            System.out.println("peace sign");
+        }
 
     }
 }
