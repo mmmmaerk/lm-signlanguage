@@ -33,9 +33,26 @@ class SampleListener extends Listener {
         boolean isA;
         boolean isB;
         boolean isD;
+        boolean isI;
         boolean isJ;
         boolean isV;
-        boolean isThumbsUp;
+        boolean isO;
+        boolean isR;
+        boolean isS;
+        boolean isT;
+        boolean isN;
+        boolean finished;
+
+        float thumbToPointer = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float thumbToMiddle = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float thumbToRing = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float thumbToPinkie = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float pointerToMiddle = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float pointerToRing = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float pointerToPinkie = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float middleToRing = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float middleToPinkie = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
+        float ringToPinkie = thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint());
 
         File word = new File("word.txt");
         File finalWord = new File("finalWord.txt");
@@ -71,8 +88,17 @@ class SampleListener extends Listener {
             pinkieFingerBone = pinkieFinger.bone(boneType);
         }
 
-        //System.out.println(pinkieFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()));
-        if (pinkieFingerBone.nextJoint().distanceTo((thumbFingerBone.nextJoint())) < 80 && pinkieFingerBone.nextJoint().distanceTo((thumbFingerBone.nextJoint())) > 50 && (middleFingerBone.nextJoint().distanceTo(thumbFingerBone.nextJoint())) > 30 && (middleFingerBone.nextJoint().distanceTo(thumbFingerBone.nextJoint())) < 45) {
+        if (thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint()) > 25 && thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint())< 55 &&
+                thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) > 35 && thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 65 &&
+                thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 55 && thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 80 &&
+                thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint())>  60 && thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 85&&
+                pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint())> 10 && pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 35 &&
+                pointerFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 20 && pointerFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 30 &&
+                pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 40 && pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 55 &&
+                middleFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) > 10 &&  middleFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 20 &&
+                middleFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 23 && middleFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 37 &&
+                ringFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 10 && ringFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 25) {
+
             isA = true;
             System.out.println("A");
 
@@ -87,9 +113,15 @@ class SampleListener extends Listener {
 
         }
 
-        if ((pinkieFingerBone.nextJoint().distanceTo((thumbFingerBone.nextJoint())) < 95 && pinkieFingerBone.nextJoint().distanceTo((thumbFingerBone.nextJoint())) >  75) && (pointerFingerBone.nextJoint().distanceTo((middleFingerBone.nextJoint())) < 30 && pointerFingerBone.nextJoint().distanceTo((middleFingerBone.nextJoint())) >  20)) {
-            System.out.println("B");
+        if (thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint()) > 55 && thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint())< 75 &&
+                thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) > 70 && thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 95 &&
+                thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 70 && thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 95 &&
+                thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint())>  50 && thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 75 &&
+                pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint())> 5 && pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 25) {
+
             isB = true;
+            System.out.println("B");
+
             try {
                 FileWriter writer = new FileWriter(word, true);
                 writer.write("B");
@@ -100,42 +132,91 @@ class SampleListener extends Listener {
             }
         }
 
-        if (pointerFingerBone.nextJoint().distanceTo(thumbFingerBone.nextJoint()) < 105 && pointerFingerBone.nextJoint().distanceTo(thumbFingerBone.nextJoint()) > 90) {
-            //System.out.println("D");
-            isD = true;
-            /**
+
+        /*if (thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint()) > 25 && thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint())< 50 &&
+                thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) > 35 && thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 55 &&
+                thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 45 && thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 65 &&
+                thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint())>  60 && thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 80 &&
+                pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint())> 0 && pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 25 &&
+                pointerFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 20 && pointerFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 40 &&
+                pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 35 && pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 55 &&
+                middleFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) > 5 &&  middleFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 30 &&
+                middleFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 20 && middleFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 40 &&
+                ringFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 20 && ringFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 100) {
+
+            isI = true;
+            System.out.println("I");
+
             try {
                 FileWriter writer = new FileWriter(word, true);
-                writer.write("D");
-                writer.flush();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } **/
-        }
-
-        if (pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) > 85 &&
-                pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 110 &&
-                pinkieFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) > 35 &&
-                pinkieFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 50) {
-
-            isV = true;
-            System.out.println("V");
-            try {
-                FileWriter writer = new FileWriter(word, true);
-                writer.write("V");
+                writer.write("I");
                 writer.flush();
                 writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+        }*/
+
+
+
+        if (thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint()) > 50 && thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint())< 100 &&
+                thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) > 50 && thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 100 &&
+                thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 10 && thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 55 &&
+                thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint())>  10 && thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 55 &&
+                pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint())> 0 && pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 45 &&
+                pointerFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 80 && pointerFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 125 &&
+                pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 80 && pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 125 &&
+                middleFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) > 80 &&  middleFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 125 &&
+                middleFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 80 && middleFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 125 &&
+                ringFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 0 && ringFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 40) {
+
+            isR = true;
+            System.out.println("R");
+
+            try {
+                FileWriter writer = new FileWriter(word, true);
+                writer.write("R");
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
-        if (thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 100 &&
-                (thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 110) &&
-                (pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 35) &&
-                (pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint())) < 45) {
-            isThumbsUp = true;
+
+
+
+        /*if (thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint()) > 25 && thumbFingerBone.nextJoint().distanceTo(pointerFingerBone.nextJoint())< 45 &&
+                thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) > 35 && thumbFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 55 &&
+                thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 45 && thumbFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 65 &&
+                thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint())> 50 && thumbFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 70 &&
+                pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint())> 5 && pointerFingerBone.nextJoint().distanceTo(middleFingerBone.nextJoint()) < 25 &&
+                pointerFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint())> 20 && pointerFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 40 &&
+                pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 35 && pointerFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 55 &&
+                middleFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) > 5 &&  middleFingerBone.nextJoint().distanceTo(ringFingerBone.nextJoint()) < 25 &&
+                middleFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 20 && middleFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 40 &&
+                ringFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) > 5 && ringFingerBone.nextJoint().distanceTo(pinkieFingerBone.nextJoint()) < 15) {
+
+            isN = true;
+            System.out.println("N");
+
+            try {
+                FileWriter writer = new FileWriter(word, true);
+                writer.write("N");
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }*/
+
+
+
+        if (firstHand.isValid() && secondHand.isValid()) {
+            finished = true;
             System.out.println("Finished");
             leapController.setPaused(true);
             if (leapController.isPaused()) {
